@@ -12,7 +12,8 @@ class Ledger
     public function __construct(string $dataStr)
     {
         $data = $this->parseInputData($dataStr);
-
+        $data = $this->sortData($data);
+        var_dump($data);
         foreach ($data as $elfNumber => $inventory) {
             // track total elves
             $this->totalElves++;
@@ -47,7 +48,33 @@ class Ledger
             }
         }
 
+        return $data;
+    }
 
+    // TODO: Make this algorithm work
+    public function sortData(array $data): array
+    {
+        // some sorting algorithm
+        for ($i = 0, $j = count($data); $i < $j; $i++) {
+            for ($k = $i, $l = count($data) - 1; $k < $l; $k++) {
+                // Check if we need to swap
+                $left = &$data[$k];
+                $right = &$data[$k + 1];
+
+                // Is left less than right?
+                if ($left < $right) {
+                    // Yes
+                    // We don't need sort this element
+                    break;
+                }
+
+                // No
+                // Swap left and right
+                $temp = $left;
+                $left = $right;
+                $right = $temp;
+            }
+        }
 
         return $data;
     }
