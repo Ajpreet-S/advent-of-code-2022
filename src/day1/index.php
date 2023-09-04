@@ -8,81 +8,22 @@
 // 5. Basic unit testing with PHPUnit
 
 
-use day1\Ledger;
-
 require "./Ledger.php";
 
 // file content -> string
 $inputStr = file_get_contents("./inputs.txt");
-$input = $inputStr;
-
-// array
-$input = explode("\n\n", $input);
-for ($i=0, $arr_len=count($input); $i<$arr_len; $i++) {
-    $input[$i] = explode("\n", $input[$i]);
-}
-
-/*
- * @var array $input An array of elves, where each elf is an associative array with the caloric value of foods in their possession
- *
- * Example:
- * [
- *     [
- *          100,
- *          200,
- *          150,
- *     ],
- *     [
- *
- *          500,
- *          750,
- *          1000,
- *     ],
- */
-foreach ($input as $elf_food_inventory) {
-    foreach ($elf_food_inventory as $food_caloric_value) {
-        $food_caloric_value = (int) $food_caloric_value;
-    }
-}
-
-// data structure used to track information on the elves and food
-$data = [
-    'totalElves' => 0,
-    'totalCalories' => 0,
-    'inventories' => [],
-    'mvp' => [
-        'elfID' => null,
-        'inventory' => [],
-        'calories' => 0,
-    ],
-];
-
-foreach ($input as $i => $inventory) {
-    // count elf
-    $data['totalElves']++;
-
-    // count elf's calories
-    $calories = 0;
-    foreach ($inventory as $foodCalories) {
-        $calories += $foodCalories;
-
-    }
-
-    // update data
-    $data['totalCalories'] += $calories;
-    $data['inventories'][] = $calories;
-
-    // update mvp data
-    if ($calories > $data['mvp']['calories']) {
-        $data['mvp']['calories'] = $calories;
-        $data['mvp']['elfID'] = $i;
+$ledger = new Ledger($inputStr);
+startMainMenu($ledger);
 
 
-        foreach ($inventory as $food) {
-            $data['mvp']['inventory'][] = $food;
-        }
-    }
-
-    $ledger = new Ledger($inputStr);
-    var_dump($ledger);
+function startMainMenu(Ledger $ledger)
+{
+    echo "// Ajpreet Singh\n" .
+        "// Advent of Code, 2022\n" .
+        "// Day 1\n" .
+        "\n" .
+        "Total elves: {$ledger->getTotalElves()}\n" .
+        "Total calories: {$ledger->getTotalCalories()}\n" .
+        "MVP number: {$ledger->getMvp()['number']}\n" .
+        "MVP total calories: {$ledger->getMvp()['calories']}\n";
 }
