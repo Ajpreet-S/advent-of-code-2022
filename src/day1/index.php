@@ -8,10 +8,13 @@
 // 5. Basic unit testing with PHPUnit
 
 
-use Ledger;
+use day1\Ledger;
+
+require "./Ledger.php";
 
 // file content -> string
-$input = file_get_contents("./inputs.txt");
+$inputStr = file_get_contents("./inputs.txt");
+$input = $inputStr;
 
 // array
 $input = explode("\n\n", $input);
@@ -80,4 +83,6 @@ foreach ($input as $i => $inventory) {
         }
     }
 
+    $ledger = new Ledger($inputStr);
+    var_dump($ledger);
 }
