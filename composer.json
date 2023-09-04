@@ -1,0 +1,17 @@
+{
+    "name": "aj/advent-of-code",
+    "require": {
+        "phpunit/phpunit": "^10.3"
+    },
+    "autoload": {
+        "psr-4": {
+            "Aj\\AdventOfCode\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Ajpreet-S",
+            "email": "singhag19@juniata.edu"
+        }
+    ]
+}
